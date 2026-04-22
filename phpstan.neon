@@ -1,0 +1,28 @@
+includes:
+        - vendor/szepeviktor/phpstan-wordpress/extension.neon
+
+parameters:
+    level: 10
+    paths:
+        - src
+    excludePaths:
+#        - src/DependencyInjection/Configuration.php
+        # WordPress/WooCommerce dependent files - require WP stubs for analysis
+    treatPhpDocTypesAsCertain: false
+    reportUnmatchedIgnoredErrors: false
+    ignoreErrors:
+        # Compiler passes work with mixed config values from Symfony DI
+        - identifier: offsetAccess.nonOffsetAccessible
+          path: src/DependencyInjection/CompilerPass/*
+        - identifier: argument.type
+          path: src/DependencyInjection/CompilerPass/*
+        - identifier: cast.string
+          path: src/DependencyInjection/CompilerPass/*
+        - identifier: missingType.generics
+          path: src/DependencyInjection/CompilerPass/*
+        - identifier: method.nonObject
+          path: src/DependencyInjection/CompilerPass/*
+        - identifier: property.nonObject
+          path: src/DependencyInjection/CompilerPass/*
+        - identifier: offsetAccess.invalidOffset
+          path: src/DependencyInjection/CompilerPass/*
